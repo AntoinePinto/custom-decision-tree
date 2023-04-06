@@ -1,6 +1,6 @@
 # Customizable Decision Tree
 
-The "Customizable Decision Tree" is a library that enables the creation of decision trees and random forests with customized splitting criteria, thus allowing the user to optimize the model for a specific problem. This tool provides the flexibility to define a metric that best suits the problem at hand, for example popular classification metrics like F1 score and recall, as well as more specific metrics such as economic profit or any user-defined cost function. 
+This repository enables the creation of decision trees and random forests with **customized splitting criteria**, thus allowing the user to optimize the model for a specific problem. This tool provides the flexibility to define a metric that best suits the problem at hand, for example popular classification metrics like F1 score and recall, as well as more specific metrics such as economic profit or any user-defined cost function. 
 
 This underused area of metric selection is particularly effective in "cost-dependent" scenarios and can lead to significant improvements in results.
 
@@ -30,9 +30,9 @@ $$ \Delta = \frac{N_t}{N} \times (I_G - \frac{N_{t_L} * I_{G_L}}{N_t} - \frac{N_
 
 At each node, the tree algorithm finds the split that minimizes $\Delta$ over all possible splits and over all features. Once the optimal split is selected, the tree is grown by recursively applying this splitting process to the resulting child nodes.
 
-## How it works
+## Example
 
-To integrate a specific metric, the user must define the `get_metric` function with a single argument representing the variables used in the metric calculation. By default, the `get_metric` function is defined as the Gini index.
+To integrate a specific metric, the user must define the `get_metric` function with a single argument representing the variables used in the metric calculation. By default, the metric is the Gini index.
 
 For example, if the goal is to minimize the cost of occurrence of class 0 and 1 such that each cost is specific to each observation, the metric can be defined as:
 
@@ -58,7 +58,7 @@ Training the model `CustomDecisionTreeClassifier` or `CustomRandomForestClassifi
 
 ```python
 model = custom_tree.CustomDecisionTreeClassifier(max_depth=2)
-model.fit(X=X, y=y, metric_vars=y, optimisation_method='minimisation')
+model.fit(X=X, y=y, metric_vars=costs, optimisation_method='minimisation')
 ```
 
 Getting predicted probabilites for each class with the possibility to return the expected metric in th predicted leaf:
@@ -67,7 +67,7 @@ Getting predicted probabilites for each class with the possibility to return the
 probas = model.predict_proba(X=X, return_exp_metric=True)
 probas[:5]
 ```
-output
+
 ```python
 >> [([0.32, 0.68], 462),
     ([0.26, 0.74], 165),
@@ -82,8 +82,6 @@ Printing the tree:
 model.print_tree(max_depth=2, features_names=None, 
                  show_delta=False, show_metric=True, show_repartition=False)
 ```
-
-output
 
 ```python
 >> |     --- node 1 -> metric = 1385
@@ -115,5 +113,9 @@ def get_delta(split, metric_vars, optimisation_method='minimisation'):
 The library currently has the following limitations :
 
 *   Only two class classification is supported
-*   Feature importance are not supported
+*   Feature importance is not supported
 *   Split computation and decision trees computation are not parallelized
+
+## Credits
+
+This repository is maintained by Antoine PINTO (antoine.pinto1@outlook.fr).
