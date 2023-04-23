@@ -4,6 +4,10 @@ This repository enables the creation of decision trees and random forests with *
 
 This underused area of metric selection is particularly effective in "cost-dependent" scenarios and can lead to significant improvements in results.
 
+<p align="center">
+  <img src="img/illustration.jpg" alt="drawing" width="500"/>
+</p>
+
 ## Examples of use
 
 Here are a few examples of how a custom splitting criteria can be useful:
@@ -61,7 +65,7 @@ model = custom_tree.CustomDecisionTreeClassifier(max_depth=2)
 model.fit(X=X, y=y, metric_vars=costs, optimisation_method='minimisation')
 ```
 
-Getting predicted probabilites for each class with the possibility to return the expected metric in th predicted leaf:
+Getting predicted probabilites for each class with the possibility to return the expected metric in the predicted leaf:
 
 ```python
 probas = model.predict_proba(X=X, return_exp_metric=True)
@@ -95,7 +99,7 @@ model.print_tree(max_depth=2, features_names=None,
 
 ## Extra
 
-The function that calculates $ \Delta $ can also be specified by the user if required. By default, this function is defined as:
+The function that calculates $\Delta$ can also be specified by the user if required. By default, this function is defined as:
 
 ```python
 def get_delta(split, metric_vars, optimisation_method='minimisation'):
@@ -110,9 +114,9 @@ def get_delta(split, metric_vars, optimisation_method='minimisation'):
 
 ## Current limitations
 
-The library currently has the following limitations :
+The library has, for now, the following limitations :
 
-*   Only two class classification is supported
+*   Only 2-class classification is supported
 *   Feature importance is not supported
 *   Split computation and decision trees computation are not parallelized
 
