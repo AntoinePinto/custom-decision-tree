@@ -28,7 +28,7 @@ Let us consider a 2-class classification using the Gini index as metric. The Gin
 
 $$ I_{G} = 1 - p_0^2 - p_1^2 $$
 
-Since the Gini index is an indicator of impurity, partitioning is done by minimising the weighted average of the index in the child nodes $L$ and $R$. This is equivalent to minimising $ \Delta $ :
+Since the Gini index is an indicator of impurity, partitioning is done by minimising the weighted average of the index in the child nodes $L$ and $R$. This is equivalent to minimising $\Delta$ :
 
 $$ \Delta = \frac{N_t}{N} \times (I_G - \frac{N_{t_L} * I_{G_L}}{N_t} - \frac{N_{t_R} * I_{G_R}}{N_t}) $$
 
